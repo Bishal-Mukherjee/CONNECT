@@ -1,0 +1,7 @@
+.landingBackgroundImage {
+  background-image: url(./assests/background.png);
+}
+
+.no-outline:focus {
+  outline: none;
+}
