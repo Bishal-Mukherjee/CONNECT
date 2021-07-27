@@ -47,9 +47,9 @@ const Register = () => {
           config
         );
         if (res.status === 200) {
-          // await axios.get(
-          //   `${process.env.REACT_APP_SERVER_URL}/api/users/mail/${email}/${name}`
-          // );
+          await axios.get(
+            `${process.env.REACT_APP_SERVER_URL}/api/users/mail/${email}/${name}`
+          );
           toast("Welcome! Please Login");
         }
       } catch (err) {
