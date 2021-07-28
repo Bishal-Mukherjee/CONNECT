@@ -47,7 +47,7 @@ router.post("/", auth, async (req, res) => {
 // @access private
 router.get("/:userName/posts", auth, async (req, res) => {
   const posts = await Post.find({ user: req.user.id }).sort({ _id: -1 });
-  
+
   if (posts) {
     return res.status(200).json(posts);
   }

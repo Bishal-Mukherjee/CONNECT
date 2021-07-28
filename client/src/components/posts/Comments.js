@@ -22,8 +22,14 @@ const Comments = () => {
 
   const { text } = values;
 
-  let reqPostID = window.location.href.substring(27, 51);
+  // let reqPostID = window.location.href.substring(27, 51);
 
+  let feedPostion = window.location.href.indexOf("feed");
+  let reqPostID = window.location.href.substring(
+    feedPostion + 5,
+    feedPostion + 5 + 24
+  );
+ 
   const getComment = async (postID) => {
     await fetch(
       `${process.env.REACT_APP_SERVER_URL}/api/posts/view_comments/${postID}`,

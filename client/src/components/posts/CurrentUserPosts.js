@@ -12,7 +12,12 @@ wants*/
 
 const CurrentUserPosts = () => {
   const history = useHistory();
-  const userID = window.location.href.substring(22, 46);
+  // const userID = window.location.href.substring(22, 46);
+  let feedPostion = window.location.href.indexOf("posts");
+  let userID = window.location.href.substring(
+    feedPostion - 25,
+    feedPostion - 1
+  );
   const [posts, setPosts] = useState([]);
   const token = Cookie.get("token");
   const user = JSON.parse(localStorage.getItem("user"));

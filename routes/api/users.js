@@ -15,6 +15,7 @@ const User = require("../../models/User");
 const config = require("config");
 const auth = require("../../middleware/auth");
 const nodemailer = require("nodemailer");
+const randomstring = require("randomstring");
 require("dotenv").config();
 
 //@route POST api/users
@@ -201,6 +202,7 @@ router.post("/request/reset-password", async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email: email }).select("-password");
   const { _id } = user;
+  const randomText = randomstring.generate(50);
 
   let transporter = nodemailer.createTransport({
     service: "gmail",
@@ -215,7 +217,7 @@ router.post("/request/reset-password", async (req, res) => {
     from: "bishalmukherjee762@gmail.com",
     to: `${email}`,
     subject: "Reset password",
-    text: `http://localhost:3000/reset-password/${_id}`,
+    text: `${process.env.REACT_APP_SERVER_URL}/reset-password/${_id}/${randomText}`,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {

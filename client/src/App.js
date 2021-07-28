@@ -33,7 +33,7 @@ function App() {
         <Route exact path="/user/:user_id/:userName" component={ViewUser} />
         <Route exact path="/:user_id/posts" component={CurrentUserPosts} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
-        <Route exact path="/reset-password/:id" component={ResetPassword} />
+        <Route exact path="/reset-password/:id/:texts" component={ResetPassword} />
         <Route exact path="/feed/search" component={SearchUser} />
         <Route
           exact

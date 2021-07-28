@@ -12,7 +12,13 @@ const ViewUser = () => {
   const [user, setUser] = useState({});
 
   //from character number 27 till the last character of the url
-  const userID = window.location.href.substring(27, 51);
+  // const userID = window.location.href.substring(27, 51);
+  let feedPostion = window.location.href.indexOf("user");
+  let userID = window.location.href.substring(
+    feedPostion + 5,
+    feedPostion + 5 + 24
+  );
+  
   const token = Cookie.get("token");
   const history = useHistory();
   const loggedInUser = JSON.parse(localStorage.getItem("user"));

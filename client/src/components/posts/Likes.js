@@ -9,18 +9,25 @@ import { isAuth } from "../../actions/actions";
 const Likes = () => {
   const history = useHistory();
   const [likes, setLikes] = useState([]);
-  const reqPostID = window.location.href.substring(27, 51);
   const token = Cookie.get("token");
+  // const reqPostID = window.location.href.substring(27, 51);
+  let feedPostion = window.location.href.indexOf("feed");
+  let reqPostID = window.location.href.substring(
+    feedPostion + 5,
+    feedPostion + 5 + 24
+  );
 
   const getLikes = async (postID) => {
-
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/api/posts/${postID}/likes`, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": `${token}`,
-      },
-      method: "get",
-    })
+    await fetch(
+      `${process.env.REACT_APP_SERVER_URL}/api/posts/${postID}/likes`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": `${token}`,
+        },
+        method: "get",
+      }
+    )
       .then((res) => res.json())
       .then((data) => setLikes(data.likes));
   };
