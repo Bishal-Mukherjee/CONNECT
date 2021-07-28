@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { isAuth } from "../../actions/actions";
+import userImage from "../../assests/userImage.png";
 
 const Likes = () => {
   const history = useHistory();
@@ -56,7 +57,7 @@ const Likes = () => {
                   borderRadius: "30rem",
                 }}
               >
-                <h2>be the first to like the post</h2>
+                <h2 style={{ color: "gray" }}>be the first to like the post</h2>
               </div>
             </div>
           )}
@@ -70,16 +71,33 @@ const Likes = () => {
                 borderRadius: "30rem",
               }}
             >
-              <img
-                src={`${process.env.REACT_APP_SERVER_URL}/api/users/profilepic/${like.user}`}
-                className="mt-1"
-                style={{
-                  width: "4rem",
-                  borderRadius: "50%",
-                  alignSelf: "center",
-                }}
-                alt="_user"
-              />
+              {like.profilepic && (
+                <img
+                  src={`${process.env.REACT_APP_SERVER_URL}/api/users/profilepic/${like.user}`}
+                  className="mt-1"
+                  style={{
+                    width: "5rem",
+                    height: "5.5rem",
+                    borderRadius: "50%",
+                    alignSelf: "center",
+                  }}
+                  alt="_user"
+                />
+              )}
+
+              {!like.profilepic && (
+                <img
+                  src={userImage}
+                  className="mt-1"
+                  style={{
+                    width: "5rem",
+                    height: "5.5rem",
+                    borderRadius: "50%",
+                    alignSelf: "center",
+                  }}
+                  alt="_user"
+                />
+              )}
 
               <p className="text-center">
                 <a

@@ -2,7 +2,6 @@ import React, { useState, Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import appBackground from "../../assests/appBackground.png";
 import Cookie from "js-cookie";
 import fetch from "node-fetch";
 require("dotenv").config();
@@ -63,8 +62,8 @@ const Login = () => {
       {!Cookie.get("token") && (
         <div
           style={{
-            backgroundImage: `url(${appBackground})`,
             paddingBottom: "9.7rem",
+            backgroundColor: "#d9d9d9",
           }}
         >
           <div className="container">
@@ -155,7 +154,7 @@ const Login = () => {
                       Sign In
                     </button>
                   </form>
-                  <p style={{ color: "gray", paddingTop: "1rem" }}>
+                  <p style={{ color: "black", paddingTop: "1rem" }}>
                     Not registered?
                     <span>
                       <Link to="/register" className="ml-2">

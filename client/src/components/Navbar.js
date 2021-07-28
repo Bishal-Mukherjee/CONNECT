@@ -18,14 +18,17 @@ const Navbar = () => {
       localStorage.removeItem("user");
       history.push("/");
     } else {
-      toast("User not logged in");
+      toast.error("User not logged in");
     }
   };
 
   return (
     <Fragment>
       <div className="container mb-2 pb-5">
-        <nav className="navbar fixed-top" style={{ backgroundColor: "white" }}>
+        <nav
+          className="navbar fixed-top"
+          style={{ backgroundColor: "#0066cc" }}
+        >
           {!isAuth() && (
             <div>
               <img
@@ -56,11 +59,12 @@ const Navbar = () => {
           {isAuth() && (
             <Fragment>
               <button
-                className="btn btn-outline-info ml-auto mt-1"
+                className="btn ml-auto mt-1"
                 onClick={() => {
                   logoutClick();
                   window.location.reload();
                 }}
+                style={{ color: "white", textDecoration: "none" }}
               >
                 {" "}
                 Log Out{" "}
@@ -74,40 +78,24 @@ const Navbar = () => {
               <a href={`/dashboard/${loggedInUser.name}/edit-user`}>
                 <i
                   className="fas fa-user-edit fa-lg mt-1 ml-2 mr-2"
-                  style={{ color: "gray" }}
+                  style={{ color: "white" }}
                 >
                   Edit
                 </i>
               </a>
             )}
 
-          {window.location.pathname === "/Register" && (
-            <Fragment>
-              <button
-                className="btn btn-outline-info ml-auto m-1"
-                onClick={() => {
-                  history.push("/");
-                }}
-              >
-                {" "}
-                Log In{" "}
-              </button>
-            </Fragment>
-          )}
-
           {isAuth() &&
             window.location.pathname !== "/dashboard" &&
             window.location.pathname !== "/register" && (
               <Fragment>
                 <button
-                  className="btn btn-outline-info mt-1 mr-1 ml-1"
+                  className="btn mt-1 mr-1 ml-1"
                   onClick={() => {
-                    !Cookie.get("token")
-                      ? toast("LogIn to visit")
-                      : history.push("/");
-
+                    history.push("/dashboard");
                     window.location.reload();
                   }}
+                  style={{ color: "white", outline: "none" }}
                 >
                   {" "}
                   {loggedInUser.name.split(" ")[0]}{" "}
@@ -116,11 +104,11 @@ const Navbar = () => {
             )}
 
           {isAuth() && window.location.pathname === "/feed" && (
-            <div className="ml-2 mt-1">
+            <div className="ml-2 mt-1 mr-2">
               <a href="/feed/search">
                 <i
                   className="fas fa-search fa-lg"
-                  style={{ color: "gray" }}
+                  style={{ color: "white" }}
                 ></i>
               </a>
             </div>

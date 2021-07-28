@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookie from "js-cookie";
 import axios from "axios";
-import appBackground from "../../assests/appBackground.png";
+// import appBackground from "../../assests/appBackground.png";
 import connectLogo from "../../assests/connectLogo.png";
 require("dotenv").config();
 
@@ -50,10 +50,10 @@ const Register = () => {
           await axios.get(
             `${process.env.REACT_APP_SERVER_URL}/api/users/mail/${email}/${name}`
           );
-          toast("Welcome! Please Login");
+          toast.success("Welcome! Please Login");
         }
       } catch (err) {
-        toast("Email already registered");
+        toast.error("Email already registered");
         console.log(err);
       }
     }
@@ -82,8 +82,8 @@ const Register = () => {
       {!Cookie.get("token") && (
         <div
           style={{
-            backgroundImage: `url(${appBackground})`,
             paddingBottom: "10rem",
+            backgroundColor: "#d9d9d9",
           }}
         >
           <div className="container">

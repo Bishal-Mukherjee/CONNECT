@@ -29,7 +29,7 @@ const Comments = () => {
     feedPostion + 5,
     feedPostion + 5 + 24
   );
- 
+
   const getComment = async (postID) => {
     await fetch(
       `${process.env.REACT_APP_SERVER_URL}/api/posts/view_comments/${postID}`,
@@ -102,7 +102,7 @@ const Comments = () => {
         }
       ).then(() => {
         getComment(reqPostID);
-        toast("Commnet Deleted");
+        toast.error("comment deleted");
       });
     }
   };
@@ -139,7 +139,7 @@ const Comments = () => {
               className="btn btn-outline-secondary ml-2 mb-1 pb-2"
               type="submit"
               onClick={() => {
-                toast("Comment Added");
+                toast.success("comment added");
               }}
             >
               <i className="fas fa-paper-plane fa-lg "></i>
@@ -169,15 +169,24 @@ const Comments = () => {
                     <img
                       src={`${process.env.REACT_APP_SERVER_URL}/api/users/profilepic/${comment.user}`}
                       className="card-img-left"
-                      style={{ width: "4rem", borderRadius: "50%" }}
+                      style={{
+                        width: "5rem",
+                        borderRadius: "50%",
+                        height: "5.5rem",
+                      }}
                       alt="user profilepic"
                     />
                   )}
+
                   {!comment.profilepic && (
                     <img
                       src={userImage}
                       className="card-img-left"
-                      style={{ width: "4rem", borderRadius: "50%" }}
+                      style={{
+                        width: "5rem",
+                        borderRadius: "50%",
+                        height: "5.5rem",
+                      }}
                       alt="user profilepic"
                     />
                   )}

@@ -65,7 +65,7 @@ const Dashboard = () => {
         history.push("/");
       });
     } else {
-      toast("Authorization not granted");
+      if (name) toast.error("Authorization not granted");
     }
   };
 
@@ -78,100 +78,112 @@ const Dashboard = () => {
       {Cookie.get("token") && (
         <Fragment>
           <div
-            className="mt-4 text-center card"
             style={{
-              boxShadow: "0 8px 16px 0 rgba(0,0,0,0.4)",
-              marginLeft: "5%",
-              marginRight: "5%",
-              marginBottom: "2%",
+              backgroundColor: "#cccccc",
+              paddingBottom: "3rem",
+              paddingTop: "1rem",
             }}
           >
-            {"  "}
-            {user.profilepic && (
-              <img
-                src={`${process.env.REACT_APP_SERVER_URL}/api/users/profilepic/${user._id}`}
-                alt="user"
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  alignSelf: "center",
-                  borderRadius: "1rem",
-                  marginTop: "1rem",
-                }}
-              />
-            )}
-
-            {!user.profilepic && (
-              <img
-                src={userImage}
-                alt="user"
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  alignSelf: "center",
-                  borderRadius: "1rem",
-                  marginTop: "1rem",
-                }}
-              />
-            )}
-
-            <h1 className="text-info">{user.name}</h1>
-            <p style={{ color: "gray" }} className="ml-2">
-              {" "}
-              {user.about}
-            </p>
-            <br />
-
-            <p className="ml-1">
-              <i className="fas fa-birthday-cake fa-lg"></i> {user.dob}
-            </p>
-            <p>
-              <i className="fas fa-home">
-                :<br />
-                <span style={{ fontWeight: "normal" }}>{user.address}</span>
-              </i>
-            </p>
-
-            <br />
-            <button
-              className="btn btn-outline-primary"
-              onClick={() => {
-                history.push("/dashboard/create-post");
-              }}
-              style={{ width: "50%", alignSelf: "center" }}
-            >
-              <i className="fas fa-plus fa-lg mr-1"> </i>
-              Create Post
-            </button>
-            <br />
-
             <div
-              className="row"
-              style={{ marginLeft: "20%", marginRight: "20%" }}
-            >
-              <div className="col-12">
-                <button
-                  className="btn btn-outline-primary"
-                  onClick={() => history.push(`/dashboard/${user.name}/posts`)}
-                  style={{ width: "80%", alignSelf: "center" }}
-                >
-                  My Posts
-                </button>
-              </div>
-            </div>
-
-            <br />
-            {"  "}
-            <button
-              className="btn btn-danger mb-3"
-              onClick={() => {
-                deleteUser();
+              className="mt-4 text-center card"
+              style={{
+                boxShadow: "0 8px 16px 0 rgba(0,0,0,0.4)",
+                marginLeft: "5%",
+                marginRight: "5%",
+                marginBottom: "2%",
               }}
-              style={{ width: "60%", alignSelf: "center" }}
             >
-              <i className="fas fa-trash fa-lg"></i>
-              DELETE USER
-            </button>
+              {"  "}
+              {user.profilepic && (
+                <img
+                  src={`${process.env.REACT_APP_SERVER_URL}/api/users/profilepic/${user._id}`}
+                  alt="user"
+                  style={{
+                    width: "11rem",
+                    height: "12rem",
+                    alignSelf: "center",
+                    borderRadius: "1rem",
+                    marginTop: "1rem",
+                  }}
+                />
+              )}
+
+              {!user.profilepic && (
+                <img
+                  src={userImage}
+                  alt="user"
+                  style={{
+                    width: "11rem",
+                    height: "12rem",
+                    alignSelf: "center",
+                    borderRadius: "1rem",
+                    marginTop: "1rem",
+                  }}
+                />
+              )}
+
+              <h1 className="ml-4">{user.name}</h1>
+              <p style={{ color: "gray" }} className="ml-2">
+                {" "}
+                {user.about}
+              </p>
+              <br />
+
+              <p className="ml-1">
+                <i className="fas fa-birthday-cake fa-lg">:</i> {user.dob}
+              </p>
+              <p>
+                <i className="fas fa-home">
+                  :
+                  <span style={{ fontWeight: "normal", marginLeft: "0.4rem" }}>
+                    {user.address}
+                  </span>
+                </i>
+              </p>
+
+              <br />
+              <button
+                className="btn btn-outline-primary"
+                onClick={() => {
+                  history.push("/dashboard/create-post");
+                }}
+                style={{ width: "50%", alignSelf: "center" }}
+              >
+                <i className="fas fa-plus fa-lg mr-1"> </i>
+                Create Post
+              </button>
+              <br />
+
+              <div
+                className="row"
+                style={{ marginLeft: "20%", marginRight: "20%" }}
+              >
+                <div className="col-12">
+                  <button
+                    className="btn btn-outline-primary"
+                    onClick={() =>
+                      history.push(`/dashboard/${user.name}/posts`)
+                    }
+                    style={{ width: "80%", alignSelf: "center" }}
+                  >
+                    My Posts
+                  </button>
+                </div>
+              </div>
+
+              <br />
+              {"  "}
+              <button
+                className="btn btn-danger mb-3"
+                onClick={() => {
+                  deleteUser();
+                }}
+                style={{ width: "60%", alignSelf: "center" }}
+              >
+                <i className="fas fa-trash fa-lg"></i>
+                DELETE USER
+              </button>
+            </div>
           </div>
         </Fragment>
       )}

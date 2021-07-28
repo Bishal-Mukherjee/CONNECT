@@ -9,7 +9,7 @@ const auth = require("../../middleware/auth");
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 const config = require("config");
-const { token } = require("morgan");
+// const { token } = require("morgan");
 
 router.get("/", auth, async (req, res) => {
   try {

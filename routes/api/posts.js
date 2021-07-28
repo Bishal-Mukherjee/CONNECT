@@ -8,6 +8,8 @@ const { check, validationResult } = require("express-validator");
 const Post = require("../../models/Posts");
 const User = require("../../models/User");
 const Posts = require("../../models/Posts");
+const { profile } = require("console");
+const e = require("express");
 const router = express.Router();
 
 // @route POST api/posts
@@ -17,6 +19,7 @@ router.post("/", auth, async (req, res) => {
   const user = await User.findOne({ _id: req.user.id }).select("-password");
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
+  const { profilepic } = user;
 
   form.parse(req, (err, fields, files) => {
     if (err) {
@@ -26,7 +29,9 @@ router.post("/", auth, async (req, res) => {
     let post = new Post(fields);
     post.user = req.user.id;
     post.name = user.name;
-    post.profilepic = user.profilepic;
+    if (profilepic.data) {
+      post.profilepic = 1;
+    }
 
     if (files.photo) {
       post.photo.data = fs.readFileSync(files.photo.path);
@@ -170,10 +175,9 @@ router.delete("/likes/delete", auth, async (req, res) => {
 router.get("/like/:post_id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.post_id);
-    const userName = await User.findOne({ _id: req.user.id }).select(
-      "name -_id"
-    );
-    const { name } = userName;
+    const user = await User.findOne({ _id: req.user.id });
+    const { name, profilepic } = user;
+    // console.log(profilepic.data);
 
     //check if the post has been already been liked
     if (
@@ -182,7 +186,12 @@ router.get("/like/:post_id", auth, async (req, res) => {
     ) {
       return res.status(400).json({ msg: "Post already liked" });
     } else {
-      post.likes.unshift({ user: req.user.id, name });
+      if (profilepic.data) {
+        post.likes.unshift({ user: req.user.id, name, profilepic: 1 });
+      } else {
+        post.likes.unshift({ user: req.user.id, name });
+      }
+
       res.status(200).send("Liked");
     }
     await post.save();
@@ -237,13 +246,24 @@ router.post(
     const post = await Post.findById(req.params.post_id);
     const user = await User.findById(req.user.id);
     const { text } = req.body;
+    const { profilepic } = user;
 
-    const newComment = {
-      text,
-      user: user.id,
-      name: user.name,
-      profilepic: user.profilepic,
-    };
+    let newComment;
+
+    if (profilepic.data) {
+      newComment = {
+        text,
+        user: user.id,
+        name: user.name,
+        profilepic: 1,
+      };
+    } else {
+      newComment = {
+        text,
+        user: user.id,
+        name: user.name,
+      };
+    }
 
     post.comments.unshift(newComment);
     await post.save();

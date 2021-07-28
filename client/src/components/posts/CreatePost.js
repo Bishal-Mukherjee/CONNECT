@@ -35,7 +35,7 @@ const CreatePost = () => {
       body: userData,
     }).then((res) => {
       if (res.status === 200) {
-        toast("Post added");
+        toast.success("Post added");
       }
     });
   };
@@ -43,7 +43,7 @@ const CreatePost = () => {
     <Fragment>
       {isAuth() && (
         <div className="container text-center" style={{ marginTop: "6rem" }}>
-          <h3 className="text-info ">Create Post</h3>
+          <h3 className="text-primary">Create Post</h3>
           <form className="form mt-3" onSubmit={(e) => handleSubmit(e)}>
             <textarea
               style={{

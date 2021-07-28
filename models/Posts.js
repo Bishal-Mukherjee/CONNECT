@@ -16,8 +16,7 @@ const postSchema = new mongoose.Schema({
     type: String,
   },
   profilepic: {
-    data: Buffer,
-    contentType: String,
+    type: Number,
   },
   likes: [
     {
@@ -28,10 +27,9 @@ const postSchema = new mongoose.Schema({
       name: {
         type: String,
       },
-      // profilepic: {
-      //   data: Buffer,
-      //   contentType: String,
-      // },
+      profilepic: {
+        type: Number,
+      },
     },
   ],
   comments: [
@@ -48,8 +46,7 @@ const postSchema = new mongoose.Schema({
         type: String,
       },
       profilepic: {
-        data: Buffer,
-        contentType: String,
+        type: Number,
       },
       date: {
         type: Date,

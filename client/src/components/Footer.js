@@ -3,10 +3,10 @@ import React from "react";
 const Footer = () => {
   return (
     <div
-      className="card mt-5"
+      className="card"
       style={{ backgroundColor: "gray", borderRadius: "none" }}
     >
-      <div style={{ alignSelf: "center" }}>
+      <div style={{ alignSelf: "center", marginLeft: "1.5rem" }}>
         <p style={{ color: "white" }}>
           <span style={{ color: "black" }}>Designed by:</span> Bishal Mukherjee
           <br />

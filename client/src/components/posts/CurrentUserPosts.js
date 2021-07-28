@@ -73,163 +73,198 @@ const CurrentUserPosts = () => {
   return (
     <Fragment>
       {isAuth() && (
-        <div className="row mr-3 ml-3 mb-3 mt-5">
-          {posts.length === 0 && (
-            <div className="mt-5 ml-5">
-              <h3 style={{ color: "gray" }}>No posts yet</h3>
-            </div>
-          )}
-          {posts.map((post, i) => (
-            <div
-              key={i}
-              className="card text-center col-12 mt-3"
-              style={{
-                boxShadow: "0 8px 16px 0 rgba(0,0,0,0.4)",
-              }}
-            >
-              {post.profilepic && (
-                <div className="card-img-md-left ml-3 mt-3">
-                  <img
-                    src={`${process.env.REACT_APP_SERVER_URL}/api/users/profilepic/${post.user}`}
-                    style={{
-                      width: "5rem",
-                      border: "solid",
-                      borderRadius: "75%",
-                      borderColor: "white",
-                    }}
-                    alt="user profilepic"
-                  />
-                </div>
-              )}
-
-              {!post.profilepic && (
-                <div className="card-img-md-left ml-3 mt-3">
-                  <img
-                    src={userImage}
-                    alt="user"
-                    style={{
-                      width: "5rem",
-                      border: "solid",
-                      borderRadius: "75%",
-                      borderColor: "white",
-                    }}
-                  />
-                </div>
-              )}
-              <p className="mt-2">{post.date}</p>
-              <hr />
-              <img
-                src={`${process.env.REACT_APP_SERVER_URL}/api/posts/view_photo/${post._id}`}
-                style={{
-                  width: "15rem",
-                  border: "solid",
-                  borderColor: "white",
-                  alignSelf: "center",
-                }}
-                alt="post_image"
-                className="rounded"
-              />
-              <hr />
-              <div className="card-body">
-                <p className="card-text">{post.text}</p>
-
-                {post.likes.find((like) => like.user.toString() === _id) && (
-                  <div className="row">
-                    <div className="col-12">
-                      <a
-                        href="#0"
-                        className="ml-2"
-                        onClick={() => {
-                          unlikePost(post._id);
-                        }}
-                        style={{ textDecoration: "none" }}
-                      >
-                        <i
-                          className="fas fa-heart fa-lg"
-                          style={{
-                            color: "red",
-                            cursor: "pointer",
-                          }}
-                        >
-                          {" "}
-                        </i>
-                      </a>
-                      <a
-                        href={`/feed/${post._id}/likes`}
-                        style={{ color: "black", textDecoration: "none" }}
-                        className="mr-2"
-                      >
-                        {" "}
-                        {post.likes.length}
-                      </a>{" "}
-                      <a
-                        href={`/feed/${post._id}/comments`}
-                        className="ml-2"
-                        style={{ textDecoration: "none", cursor: "pointer" }}
-                      >
-                        <i
-                          className="far fa-comment fa-lg"
-                          style={{ color: "gray" }}
-                        >
-                          {" "}
-                        </i>
-                        <span style={{ color: "black" }}>
-                          {" "}
-                          {post.comments.length}
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                )}
-
-                {!post.likes.find((like) => like.user.toString() === _id) && (
-                  <div className="row">
-                    <div className="col-12">
-                      <a
-                        href="#0"
-                        className="ml-2"
-                        onClick={() => {
-                          likePost(post._id);
-                        }}
-                        style={{ textDecoration: "none" }}
-                      >
-                        <i
-                          className="far fa-heart fa-lg"
-                          style={{ color: "black", cursor: "pointer" }}
-                        >
-                          {" "}
-                        </i>
-                      </a>
-                      <a
-                        className="mr-2"
-                        href={`/feed/${post._id}/likes`}
-                        style={{ color: "black", textDecoration: "none" }}
-                      >
-                        {" "}
-                        {post.likes.length}
-                      </a>{" "}
-                      <a
-                        href={`/feed/${post._id}/comments`}
-                        className="ml-2"
-                        style={{ textDecoration: "none", cursor: "pointer" }}
-                      >
-                        <i
-                          className="far fa-comment fa-lg"
-                          style={{ color: "black" }}
-                        >
-                          {" "}
-                        </i>
-                        <span style={{ color: "black" }}>
-                          {" "}
-                          {post.comments.length}
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                )}
+        <div
+          style={{
+            backgroundColor: "#cccccc",
+            paddingBottom: "2rem",
+            paddingTop: "0.1rem",
+          }}
+        >
+          <div className="row mr-3 ml-3 mb-3 mt-4">
+            {posts.length === 0 && (
+              <div className="mt-5 ml-5">
+                <h3 style={{ color: "gray" }}>No posts yet</h3>
               </div>
-            </div>
-          ))}
+            )}
+            {posts.map((post, i) => (
+              <div
+                key={i}
+                className="card text-center col-12 mt-3"
+                style={{
+                  boxShadow: "0 8px 16px 0 rgba(0,0,0,0.4)",
+                }}
+              >
+                {post.profilepic && (
+                  <div className="card-img-md-left ml-3 mt-3">
+                    <img
+                      src={`${process.env.REACT_APP_SERVER_URL}/api/users/profilepic/${post.user}`}
+                      style={{
+                        width: "5rem",
+                        height: "5.5rem",
+                        border: "solid",
+                        borderRadius: "75%",
+                        borderColor: "white",
+                      }}
+                      alt="user profilepic"
+                    />
+                  </div>
+                )}
+
+                {!post.profilepic && (
+                  <div className="card-img-md-left ml-3 mt-3">
+                    <img
+                      src={userImage}
+                      alt="user"
+                      style={{
+                        width: "5rem",
+                        height: "5.5rem",
+                        border: "solid",
+                        borderRadius: "75%",
+                        borderColor: "white",
+                      }}
+                    />
+                  </div>
+                )}
+
+                <div className="card-title">
+                  <p>
+                    <span className="ml-4">
+                      <a
+                        href={`/user/${post.user}/${post.name}`}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        {post.name}
+                      </a>
+                    </span>
+                  </p>
+                  <p className="ml-2">
+                    {post.date
+                      .toString()
+                      .substring(0, 10)
+                      .concat(" / ")
+                      .concat(post.date.toString().substring(12, 19))}
+                  </p>
+                </div>
+
+                {post.photo && (
+                  <div>
+                    <hr />
+                    <img
+                      src={`${process.env.REACT_APP_SERVER_URL}/api/posts/view_photo/${post._id}`}
+                      style={{
+                        width: "15rem",
+                        border: "solid",
+                        borderColor: "white",
+                        alignSelf: "center",
+                      }}
+                      alt="post_image"
+                      className="rounded"
+                    />
+                    <hr />
+                  </div>
+                )}
+
+                <div className="card-body">
+                  <p className="card-text">{post.text}</p>
+
+                  {post.likes.find((like) => like.user.toString() === _id) && (
+                    <div className="row">
+                      <div className="col-12">
+                        <a
+                          href="#0"
+                          className="ml-2"
+                          onClick={() => {
+                            unlikePost(post._id);
+                          }}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <i
+                            className="fas fa-heart fa-lg"
+                            style={{
+                              color: "red",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {" "}
+                          </i>
+                        </a>
+                        <a
+                          href={`/feed/${post._id}/likes`}
+                          style={{ color: "black", textDecoration: "none" }}
+                          className="mr-2"
+                        >
+                          {" "}
+                          {post.likes.length}
+                        </a>{" "}
+                        <a
+                          href={`/feed/${post._id}/comments`}
+                          className="ml-2"
+                          style={{ textDecoration: "none", cursor: "pointer" }}
+                        >
+                          <i
+                            className="far fa-comment fa-lg"
+                            style={{ color: "gray" }}
+                          >
+                            {" "}
+                          </i>
+                          <span style={{ color: "black" }}>
+                            {" "}
+                            {post.comments.length}
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  )}
+
+                  {!post.likes.find((like) => like.user.toString() === _id) && (
+                    <div className="row">
+                      <div className="col-12">
+                        <a
+                          href="#0"
+                          className="ml-2"
+                          onClick={() => {
+                            likePost(post._id);
+                          }}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <i
+                            className="far fa-heart fa-lg"
+                            style={{ color: "black", cursor: "pointer" }}
+                          >
+                            {" "}
+                          </i>
+                        </a>
+                        <a
+                          className="mr-2"
+                          href={`/feed/${post._id}/likes`}
+                          style={{ color: "black", textDecoration: "none" }}
+                        >
+                          {" "}
+                          {post.likes.length}
+                        </a>{" "}
+                        <a
+                          href={`/feed/${post._id}/comments`}
+                          className="ml-2"
+                          style={{ textDecoration: "none", cursor: "pointer" }}
+                        >
+                          <i
+                            className="far fa-comment fa-lg"
+                            style={{ color: "black" }}
+                          >
+                            {" "}
+                          </i>
+                          <span style={{ color: "black" }}>
+                            {" "}
+                            {post.comments.length}
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
       {!isAuth() && history.push("/")}

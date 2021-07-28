@@ -18,7 +18,7 @@ const ViewUser = () => {
     feedPostion + 5,
     feedPostion + 5 + 24
   );
-  
+
   const token = Cookie.get("token");
   const history = useHistory();
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
@@ -50,68 +50,76 @@ const ViewUser = () => {
       {/* to check if the post belongs to the same user who is looged in */}
       {isAuth() && user._id !== loggedInUser._id && (
         <div
-          className="card mt-5 text-center"
           style={{
-            boxShadow: "0 8px 16px 0 rgba(0,0,0,0.4)",
-            marginLeft: "5%",
-            marginRight: "5%",
-            marginBottom: "2%",
-            paddingBottom: "15rem",
+            backgroundColor: "#cccccc",
+            paddingBottom: "2rem",
+            paddingTop: "1rem",
           }}
         >
-          {user.profilepic && (
-            <img
-              src={`${process.env.REACT_APP_SERVER_URL}/api/users/profilepic/${userID}`}
-              style={{
-                width: "10rem",
-                height: "11rem",
-                alignSelf: "center",
-              }}
-              className="mt-4 rounded"
-              alt="user profilepic"
-            />
-          )}
-
-          {!user.profilepic && (
-            <img
-              src={userImage}
-              style={{
-                width: "10rem",
-                height: "11rem",
-                alignSelf: "center",
-              }}
-              className="mt-2 rounded"
-              alt="user profilepic"
-            />
-          )}
-
-          <h1 className="text-info">{user.name}</h1>
-          <p style={{ color: "gray" }} className="ml-2">
-            {" "}
-            {user.about}
-          </p>
-          <br />
-
-          <p className="ml-2">
-            <i className="fas fa-birthday-cake fa-lg"></i> {user.dob}
-          </p>
-          <p>
-            <i className="fas fa-home">
-              :<br />
-              <span style={{ fontWeight: "normal" }}>{user.address}</span>
-            </i>
-          </p>
-          <br />
-          <br />
-          <button
-            className="btn btn-outline-primary"
-            style={{ marginLeft: "25%", marginRight: "25%" }}
-            onClick={() => {
-              history.push(`/${userID}/posts`);
+          <div
+            className="card mt-4 text-center"
+            style={{
+              boxShadow: "0 8px 16px 0 rgba(0,0,0,0.4)",
+              marginLeft: "5%",
+              marginRight: "5%",
+              marginBottom: "2%",
+              paddingBottom: "15rem",
             }}
           >
-            View Posts
-          </button>
+            {user.profilepic && (
+              <img
+                src={`${process.env.REACT_APP_SERVER_URL}/api/users/profilepic/${userID}`}
+                style={{
+                  width: "10rem",
+                  height: "11rem",
+                  alignSelf: "center",
+                }}
+                className="mt-4 rounded"
+                alt="user profilepic"
+              />
+            )}
+
+            {!user.profilepic && (
+              <img
+                src={userImage}
+                style={{
+                  width: "10rem",
+                  height: "11rem",
+                  alignSelf: "center",
+                }}
+                className="mt-2 rounded"
+                alt="user profilepic"
+              />
+            )}
+
+            <h1>{user.name}</h1>
+            <p style={{ color: "gray" }} className="ml-2">
+              {" "}
+              {user.about}
+            </p>
+            <br />
+
+            <p className="ml-2">
+              <i className="fas fa-birthday-cake fa-lg"></i> {user.dob}
+            </p>
+            <p>
+              <i className="fas fa-home">
+                :<br />
+                <span style={{ fontWeight: "normal" }}>{user.address}</span>
+              </i>
+            </p>
+            <br />
+            <br />
+            <button
+              className="btn btn-outline-primary"
+              style={{ marginLeft: "25%", marginRight: "25%" }}
+              onClick={() => {
+                history.push(`/${userID}/posts`);
+              }}
+            >
+              View Posts
+            </button>
+          </div>
         </div>
       )}
       {isAuth() && user._id === loggedInUser._id && history.push("/dashboard")}

@@ -54,7 +54,7 @@ const EditUser = () => {
     <Fragment>
       {isAuth() && (
         <div className="container mt-5 text-center">
-          <h1 className="text-info">Edit User details</h1>
+          <h1 className="text-primary">Edit User details</h1>
           <form
             className="form mt-4"
             onSubmit={(e) => {
@@ -124,7 +124,7 @@ const EditUser = () => {
             <br />
             <br />
             <button
-              className="btn btn-info"
+              className="btn btn-outline-primary"
               style={{ width: "70%" }}
               onClick={() => {
                 handleSubmitClick();

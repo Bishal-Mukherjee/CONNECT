@@ -114,22 +114,30 @@ const SearchUser = () => {
                   key={i}
                 >
                   {user.profilepic && (
-                    <div className="mt-4">
+                    <div className="mt-3">
                       <img
                         src={`${process.env.REACT_APP_SERVER_URL}/api/users/profilepic/${user._id}`}
                         className="card-img-left"
-                        style={{ width: "4rem", borderRadius: "50%" }}
+                        style={{
+                          width: "5rem",
+                          height: "5.5rem",
+                          borderRadius: "50%",
+                        }}
                         alt="user profilepic"
                       />
                     </div>
                   )}
 
                   {!user.profilepic && (
-                    <div className="mt-4">
+                    <div className="mt-3">
                       <img
                         src={userImage}
                         className="card-img-left"
-                        style={{ width: "4rem", borderRadius: "50%" }}
+                        style={{
+                          width: "5rem",
+                          height: "5.5rem",
+                          borderRadius: "50%",
+                        }}
                         alt="user profilepic"
                       />
                     </div>
