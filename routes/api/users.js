@@ -151,7 +151,7 @@ router.get("/mail/:mail_id/:name", async (req, res) => {
   });
 
   var mailOptions = {
-    from: "bishalmukherjee762@gmail.com",
+    from: `${process.env.EMAIL}`,
     to: `${mail_id}`,
     subject: "Welcome to Connect!",
     text: `Hey ${name}, Welcome to Connect!`,
