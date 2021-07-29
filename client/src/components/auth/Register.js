@@ -259,7 +259,9 @@ const Register = () => {
                       Already registered?{" "}
                       <span>
                         {" "}
-                        <Link to="/">Sign In</Link>
+                        <Link to="/" style={{ textDecoration: "none" }}>
+                          Sign In
+                        </Link>
                       </span>
                     </p>
                   </form>

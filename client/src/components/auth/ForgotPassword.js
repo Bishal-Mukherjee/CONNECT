@@ -46,7 +46,7 @@ const ForgotPassword = () => {
           method: "post",
           body: JSON.stringify({ email }),
         }
-      ).then(() => toast("Reset link sent"));
+      ).then(() => toast.success("Reset link sent"));
     }
   };
 

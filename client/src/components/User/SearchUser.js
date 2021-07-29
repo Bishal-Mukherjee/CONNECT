@@ -146,8 +146,7 @@ const SearchUser = () => {
                   <div className="card-body mt-4">
                     <a
                       href={`/user/${user._id}/${user.name}`}
-                      className="text-info"
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: "none", color: "black" }}
                     >
                       {user.name}
                     </a>

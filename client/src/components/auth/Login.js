@@ -62,7 +62,7 @@ const Login = () => {
       {!Cookie.get("token") && (
         <div
           style={{
-            paddingBottom: "9.7rem",
+            paddingBottom: "10rem",
             backgroundColor: "#d9d9d9",
           }}
         >
@@ -157,11 +157,20 @@ const Login = () => {
                   <p style={{ color: "black", paddingTop: "1rem" }}>
                     Not registered?
                     <span>
-                      <Link to="/register" className="ml-2">
+                      <Link
+                        to="/register"
+                        className="ml-2"
+                        style={{ textDecoration: "none" }}
+                      >
                         Click Me
                       </Link>
                       <br />
-                      <Link to="/forgot-password">Forgot Password?</Link>
+                      <Link
+                        to="/forgot-password"
+                        style={{ textDecoration: "none" }}
+                      >
+                        Forgot Password?
+                      </Link>
                     </span>
                   </p>
                 </div>

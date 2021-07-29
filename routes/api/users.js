@@ -140,7 +140,9 @@ router.post("/searchUsers", auth, async (req, res) => {
 //@access Public
 router.get("/mail/:mail_id/:name", async (req, res) => {
   const mail_id = req.params.mail_id;
-  const name = req.params.name;
+  let name = req.params.name;
+  name = name.toString().substring(0, name.indexOf(" "));
+
   let transporter = nodemailer.createTransport({
     service: "gmail",
     secure: false,
@@ -154,7 +156,7 @@ router.get("/mail/:mail_id/:name", async (req, res) => {
     from: `${process.env.EMAIL}`,
     to: `${mail_id}`,
     subject: "Welcome to Connect!",
-    text: `Hey ${name}, Welcome to Connect!`,
+    text: `Hey ${name}, Welcome to Connect Community!`,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
@@ -169,7 +171,8 @@ router.get("/mail/:mail_id/:name", async (req, res) => {
 //@access Public
 router.get("/delete_mail/:mail_id/:name", async (req, res) => {
   const mail_id = req.params.mail_id;
-  const name = req.params.name;
+  let name = req.params.name;
+  name = name.toString().substring(0, name.indexOf(" "));
   let transporter = nodemailer.createTransport({
     service: "gmail",
     secure: false,
@@ -214,7 +217,7 @@ router.post("/request/reset-password", async (req, res) => {
   });
 
   var mailOptions = {
-    from: "bishalmukherjee762@gmail.com",
+    from: `${process.env.EMAIL}`,
     to: `${email}`,
     subject: "Reset password",
     text: `${process.env.REACT_APP_SERVER_URL}/reset-password/${_id}/${randomText}`,
