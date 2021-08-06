@@ -5,7 +5,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookie from "js-cookie";
 import axios from "axios";
-// import appBackground from "../../assests/appBackground.png";
 import connectLogo from "../../assests/connectLogo.png";
 require("dotenv").config();
 
