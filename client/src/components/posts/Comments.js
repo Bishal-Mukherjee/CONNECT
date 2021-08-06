@@ -99,7 +99,7 @@ const Comments = () => {
       }
     ).then(() => {
       getComment(reqPostID);
-      toast("Commnet Deleted");
+      toast.success("Comment Deleted");
     });
   };
 

@@ -31,7 +31,7 @@ const ForgotPassword = () => {
       .then((data) => {
         setValues(data);
       })
-      .catch(() => toast("Invalid Email"));
+      .catch(() => toast.error("Invalid Email"));
     sendResetMail(values.email);
   };
 

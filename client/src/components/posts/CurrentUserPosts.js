@@ -76,13 +76,12 @@ const CurrentUserPosts = () => {
         <div
           style={{
             backgroundColor: "#cccccc",
-            paddingBottom: "2rem",
-            paddingTop: "0.1rem",
+            paddingBottom: "10rem",
+            paddingTop: "0.2rem",
           }}
         >
           <div
             className="row mr-3 ml-3 mt-4"
-            style={{ marginBottom: "70%" }}
           >
             {posts.length === 0 && (
               <div className="mt-5 ml-5">

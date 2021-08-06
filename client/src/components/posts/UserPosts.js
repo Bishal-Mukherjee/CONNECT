@@ -75,7 +75,7 @@ const UserPosts = () => {
       }
     ).then(() => {
       getPosts();
-      toast("Post deleted");
+      toast.success("Post deleted");
     });
   };
 
