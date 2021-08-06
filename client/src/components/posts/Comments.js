@@ -22,13 +22,7 @@ const Comments = () => {
 
   const { text } = values;
 
-  // let reqPostID = window.location.href.substring(27, 51);
-
-  let feedPostion = window.location.href.indexOf("feed");
-  let reqPostID = window.location.href.substring(
-    feedPostion + 5,
-    feedPostion + 5 + 24
-  );
+  let reqPostID = window.location.href.substring(27, 51);
 
   const getComment = async (postID) => {
     await fetch(
@@ -87,24 +81,20 @@ const Comments = () => {
   };
 
   const deleteComment = async (commentID) => {
-    const confirmation = window.confirm("Do you want to delete comment");
-
-    if (confirmation) {
-      await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/api/posts/remove_comment/${reqPostID}/${commentID}`,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            "x-auth-token": `${token}`,
-          },
-          method: "delete",
-        }
-      ).then(() => {
-        getComment(reqPostID);
-        toast.error("comment deleted");
-      });
-    }
+    await fetch(
+      `${process.env.REACT_APP_SERVER_URL}/api/posts/remove_comment/${reqPostID}/${commentID}`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "x-auth-token": `${token}`,
+        },
+        method: "delete",
+      }
+    ).then(() => {
+      getComment(reqPostID);
+      toast("Commnet Deleted");
+    });
   };
 
   return (
@@ -139,7 +129,7 @@ const Comments = () => {
               className="btn btn-outline-secondary ml-2 mb-1 pb-2"
               type="submit"
               onClick={() => {
-                toast.success("comment added");
+                toast("Comment Added");
               }}
             >
               <i className="fas fa-paper-plane fa-lg "></i>
@@ -169,24 +159,15 @@ const Comments = () => {
                     <img
                       src={`${process.env.REACT_APP_SERVER_URL}/api/users/profilepic/${comment.user}`}
                       className="card-img-left"
-                      style={{
-                        width: "5rem",
-                        borderRadius: "50%",
-                        height: "5.5rem",
-                      }}
+                      style={{ width: "4rem", borderRadius: "50%" }}
                       alt="user profilepic"
                     />
                   )}
-
                   {!comment.profilepic && (
                     <img
                       src={userImage}
                       className="card-img-left"
-                      style={{
-                        width: "5rem",
-                        borderRadius: "50%",
-                        height: "5.5rem",
-                      }}
+                      style={{ width: "4rem", borderRadius: "50%" }}
                       alt="user profilepic"
                     />
                   )}
@@ -194,7 +175,7 @@ const Comments = () => {
                 <div className="card-body">
                   <a
                     href={`/user/${comment.user}/${comment.name}`}
-                    className="text-info"
+                    className="text-dark"
                     style={{ textDecoration: "none" }}
                   >
                     {comment.name}
@@ -203,17 +184,84 @@ const Comments = () => {
 
                   {(loggedInUser._id === comment.user ||
                     loggedInUser._id === getPost.user) && (
-                    <i
-                      className="fas fa-trash fa-lg"
-                      style={{
-                        marginLeft: "100%",
-                        color: "red",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => {
-                        deleteComment(comment._id);
-                      }}
-                    ></i>
+                    <div>
+                      <button
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#deleteComment"
+                        style={{
+                          marginLeft: "95%",
+                          background: "none",
+                          border: "none",
+                          outline: "none",
+                        }}
+                      >
+                        <i
+                          className="fas fa-trash fa-lg"
+                          style={{
+                            color: "red",
+                            cursor: "pointer",
+                          }}
+                        ></i>
+                      </button>
+
+                      <div
+                        className="modal fade"
+                        id="deleteComment"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                      >
+                        <div
+                          className="modal-dialog"
+                          role="document"
+                          style={{
+                            boxShadow: "0 8px 16px 0 rgba(0,0,0,0.6)",
+                          }}
+                        >
+                          <div className="modal-content">
+                            <div className="modal-body">
+                              <button
+                                type="button"
+                                className="close ml-auto"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                                style={{ outline: "none" }}
+                              >
+                                {" "}
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                              <p
+                                style={{
+                                  alignSelf: "center",
+                                  fontWeight: "400",
+                                  fontSize: "15px",
+                                }}
+                                className="mt-3"
+                              >
+                                Are you sure to delete comment?
+                              </p>
+                              <button
+                                className="btn btn-danger"
+                                data-dismiss="modal"
+                                onClick={() => {
+                                  deleteComment(comment._id);
+                                }}
+                              >
+                                Yes
+                              </button>
+                              <button
+                                className="btn btn-secondary ml-2"
+                                data-dismiss="modal"
+                              >
+                                No
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>

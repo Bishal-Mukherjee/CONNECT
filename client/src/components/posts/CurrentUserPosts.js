@@ -80,7 +80,10 @@ const CurrentUserPosts = () => {
             paddingTop: "0.1rem",
           }}
         >
-          <div className="row mr-3 ml-3 mb-3 mt-4">
+          <div
+            className="row mr-3 ml-3 mt-4"
+            style={{ marginBottom: "70%" }}
+          >
             {posts.length === 0 && (
               <div className="mt-5 ml-5">
                 <h3 style={{ color: "gray" }}>No posts yet</h3>

@@ -9,6 +9,7 @@ require("dotenv").config();
 const EditUser = () => {
   const history = useHistory();
   const token = Cookie.get("token");
+  document.title = "Edit Profile";
 
   const [values, setValues] = useState({
     name: "",
@@ -54,7 +55,7 @@ const EditUser = () => {
     <Fragment>
       {isAuth() && (
         <div className="container mt-5 text-center">
-          <h1 className="text-primary">Edit User details</h1>
+          <h1 className="text-primary">Edit Profile</h1>
           <form
             className="form mt-4"
             onSubmit={(e) => {

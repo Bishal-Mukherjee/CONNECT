@@ -64,23 +64,19 @@ const UserPosts = () => {
   };
 
   const deletePost = async (postID) => {
-    const confirmation = window.confirm("Do you want to delete this post?");
-
-    if (confirmation) {
-      await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/api/posts/delete/${postID}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "x-auth-token": `${token}`,
-          },
-          method: "delete",
-        }
-      ).then(() => {
-        getPosts();
-        toast("Post deleted");
-      });
-    }
+    await fetch(
+      `${process.env.REACT_APP_SERVER_URL}/api/posts/delete/${postID}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": `${token}`,
+        },
+        method: "delete",
+      }
+    ).then(() => {
+      getPosts();
+      toast("Post deleted");
+    });
   };
 
   return (
@@ -100,17 +96,82 @@ const UserPosts = () => {
                 boxShadow: "0 8px 16px 0 rgba(0,0,0,0.4)",
               }}
             >
-              <i
-                className="fas fa-trash fa-lg mr-2 mt-3"
+              <button
+                type="button"
+                data-toggle="modal"
+                data-target="#deletePost"
                 style={{
                   alignSelf: "flex-end",
-                  color: "red",
-                  cursor: "pointer",
+                  marginTop: "0.5rem",
+                  background: "none",
+                  border: "none",
+                  outline: "none",
                 }}
-                onClick={() => {
-                  deletePost(post._id);
-                }}
-              ></i>
+              >
+                <i
+                  className="fas fa-trash fa-lg"
+                  style={{
+                    alignSelf: "flex-end",
+                    color: "red",
+                    cursor: "pointer",
+                  }}
+                ></i>
+              </button>
+              <div
+                className="modal fade"
+                id="deletePost"
+                tabIndex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div
+                  className="modal-dialog"
+                  role="document"
+                  style={{ boxShadow: "0 8px 16px 0 rgba(0,0,0,0.6)" }}
+                >
+                  <div className="modal-content">
+                    <div className="modal-body">
+                      <button
+                        type="button"
+                        className="close ml-auto"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                        style={{ outline: "none" }}
+                      >
+                        {" "}
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <p
+                        style={{
+                          alignSelf: "center",
+                          fontWeight: "400",
+                          fontSize: "15px",
+                        }}
+                        className="mt-3"
+                      >
+                        Are you sure to delete post?
+                      </p>
+                      <button
+                        className="btn btn-danger"
+                        data-dismiss="modal"
+                        onClick={() => {
+                          deletePost(post._id);
+                        }}
+                      >
+                        Yes
+                      </button>
+                      <button
+                        className="btn btn-secondary ml-2"
+                        data-dismiss="modal"
+                      >
+                        No
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {post.profilepic && (
                 <div className="card-img-md-left ml-3 mt-3">
                   <img

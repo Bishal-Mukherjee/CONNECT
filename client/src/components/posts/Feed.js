@@ -10,6 +10,7 @@ require("dotenv").config();
 const Feed = () => {
   const history = useHistory();
   const token = Cookie.get("token");
+  document.title = "Feed";
 
   const [posts, setPosts] = useState([]);
 
@@ -63,7 +64,7 @@ const Feed = () => {
   return (
     <Fragment>
       {isAuth() && (
-        <div style={{ backgroundColor: "#cccccc" }}>
+        <div style={{ backgroundColor: "#cccccc", paddingBottom: "20%" }}>
           <div
             className="row"
             style={{
