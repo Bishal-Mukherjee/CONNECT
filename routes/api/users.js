@@ -220,7 +220,7 @@ router.post("/request/reset-password", async (req, res) => {
     from: `${process.env.EMAIL}`,
     to: `${email}`,
     subject: "Reset password",
-    text: `${process.env.REACT_APP_SERVER_URL}/reset-password/${_id}/${randomText}`,
+    text: `${process.env.CLIENT_URL}/reset-password/${_id}/${randomText}`,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {

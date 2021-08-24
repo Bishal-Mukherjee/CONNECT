@@ -3,13 +3,12 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { isAuth } from "../../actions/actions";
 import FormData from "form-data";
-import Cookie from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
 require("dotenv").config();
 
 const CreatePost = () => {
   const history = useHistory();
-  const token = Cookie.get("token");
+  const token = localStorage.getItem("token");
   const [values, setValues] = useState({
     text: "",
     photo: "",

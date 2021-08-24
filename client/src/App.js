@@ -35,7 +35,7 @@ function App() {
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route
           exact
-          path="/reset-password/:id/:texts"
+          path="/reset-password/:id/:text"
           component={ResetPassword}
         />
         <Route exact path="/feed/search" component={SearchUser} />

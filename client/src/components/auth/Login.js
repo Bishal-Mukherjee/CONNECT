@@ -2,8 +2,8 @@ import React, { useState, Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Cookie from "js-cookie";
 import fetch from "node-fetch";
+// import "../src/App.css"
 require("dotenv").config();
 
 const Login = () => {
@@ -15,6 +15,8 @@ const Login = () => {
   const { email, password } = values;
 
   const history = useHistory();
+
+  const token = localStorage.getItem("token");
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -37,14 +39,15 @@ const Login = () => {
         .then((res) => res.json())
         .then((data) => {
           localStorage.setItem("user", JSON.stringify(data.user));
-          Cookie.set("token", data.token);
+          localStorage.setItem("token", data.token);
           history.push("/feed");
+          window.location.reload();
           setValues({ ...values, email: "", password: "", redirect: true });
         });
     } catch (err) {
       toast("Sign In failed", "warning");
-      Cookie.remove("token");
       localStorage.removeItem("user");
+      localStorage.removeItem("token");
     }
   };
 
@@ -59,7 +62,7 @@ const Login = () => {
 
   return (
     <Fragment>
-      {!Cookie.get("token") && (
+      {!token && (
         <div
           style={{
             paddingBottom: "10rem",
@@ -179,7 +182,7 @@ const Login = () => {
           </div>
         </div>
       )}
-      {Cookie.get("token") && history.push("/dashboard")}
+      {token && history.push("/dashboard")}
 
       <ToastContainer className="Toastify__toast-container--top-center" />
     </Fragment>

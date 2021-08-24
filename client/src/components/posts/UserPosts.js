@@ -1,4 +1,3 @@
-import Cookie from "js-cookie";
 import React, { Fragment } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -11,7 +10,7 @@ require("dotenv").config();
 const UserPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
-  const token = Cookie.get("token");
+  const token = localStorage.getItem("token");
   const userName = user.name;
   const history = useHistory();
   const { _id } = user;

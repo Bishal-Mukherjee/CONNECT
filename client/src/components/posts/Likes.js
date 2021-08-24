@@ -1,4 +1,3 @@
-import Cookie from "js-cookie";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -10,7 +9,7 @@ import userImage from "../../assests/userImage.png";
 const Likes = () => {
   const history = useHistory();
   const [likes, setLikes] = useState([]);
-  const token = Cookie.get("token");
+  const token = localStorage.getItem("token");
   // const reqPostID = window.location.href.substring(27, 51);
   let feedPostion = window.location.href.indexOf("feed");
   let reqPostID = window.location.href.substring(

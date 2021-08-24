@@ -3,7 +3,6 @@ import { Fragment } from "react";
 import { isAuth } from "../../actions/actions";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import Cookie from "js-cookie";
 import { useEffect } from "react";
 import userImage from "../../assests/userImage.png";
 require("dotenv").config();
@@ -19,7 +18,7 @@ const CurrentUserPosts = () => {
     feedPostion - 1
   );
   const [posts, setPosts] = useState([]);
-  const token = Cookie.get("token");
+  const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
   const { _id } = user;
 

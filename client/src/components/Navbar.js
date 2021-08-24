@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { toast } from "react-toastify";
-import Cookie from "js-cookie";
 import { isAuth } from "../actions/actions";
 import { useHistory } from "react-router-dom";
 import connectLogo from "../assests/connectLogo.png";
@@ -13,8 +12,8 @@ const Navbar = () => {
   // const userName = name.split(" ")[0];
 
   const logoutClick = () => {
-    if (Cookie.get("token")) {
-      Cookie.remove("token");
+    if (localStorage.getItem("token")) {
+      localStorage.removeItem("token");
       localStorage.removeItem("user");
       history.push("/");
     } else {
@@ -64,7 +63,12 @@ const Navbar = () => {
                   logoutClick();
                   window.location.reload();
                 }}
-                style={{ color: "white", textDecoration: "none" }}
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  fontWeight: "100",
+                  fontSize: "1.1rem",
+                }}
               >
                 {" "}
                 Log Out{" "}
@@ -90,15 +94,20 @@ const Navbar = () => {
             window.location.pathname !== "/register" && (
               <Fragment>
                 <button
-                  className="btn mt-1 mr-1 ml-1"
+                  className="btn mt-1 mr-1"
                   onClick={() => {
                     history.push("/dashboard");
                     window.location.reload();
                   }}
-                  style={{ color: "white", outline: "none" }}
+                  style={{
+                    color: "white",
+                    outline: "none",
+                  }}
                 >
-                  {" "}
-                  {loggedInUser.name.split(" ")[0]}{" "}
+                  <i
+                    style={{ fontWeight: "100" }}
+                    className="fas fa-user fa-2x"
+                  ></i>
                 </button>
               </Fragment>
             )}

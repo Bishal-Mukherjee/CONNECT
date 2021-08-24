@@ -4,7 +4,11 @@ import { toast, ToastContainer } from "react-toastify";
 require("dotenv").config();
 
 const ResetPassword = () => {
-  const userID = window.location.href.substring(37);
+  const indexOfReset = window.location.href.indexOf("/reset-password/");
+  const userID = window.location.href.substring(
+    indexOfReset + 16,
+    indexOfReset + 40
+  );
 
   const [values, setValues] = useState({
     password: "",
@@ -27,7 +31,7 @@ const ResetPassword = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          method: "post",
+          method: "POST",
           body: JSON.stringify({ password }),
         }
       )

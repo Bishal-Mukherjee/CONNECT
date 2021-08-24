@@ -17,6 +17,8 @@ const Register = () => {
     profilepic: "",
   });
 
+  const token = localStorage.getItem("token");
+
   const [userData, setUserData] = useState(new FormData());
   const { name, email, password, password2 } = values;
   const history = useHistory();
@@ -78,7 +80,7 @@ const Register = () => {
 
   return (
     <Fragment>
-      {!Cookie.get("token") && (
+      {!token && (
         <div
           style={{
             paddingBottom: "10rem",
@@ -266,13 +268,13 @@ const Register = () => {
                   </form>
                 </div>
 
-                {Cookie.get("token") && history.push("/dashboard")}
+                {token && history.push("/dashboard")}
               </div>
             </div>
           </div>
         </div>
       )}
-      {Cookie.get("token") && history.push("/dashboard")}
+      {token && history.push("/dashboard")}
 
       <ToastContainer className="Toastify__toast-container--top-center" />
     </Fragment>

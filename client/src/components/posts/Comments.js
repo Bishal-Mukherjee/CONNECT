@@ -1,4 +1,3 @@
-import Cookie from "js-cookie";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Fragment } from "react";
@@ -10,7 +9,7 @@ require("dotenv").config();
 
 const Comments = () => {
   const history = useHistory();
-  const token = Cookie.get("token");
+  const token = localStorage.getItem("token");
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
 
   const [comments, setComments] = useState([]);
@@ -99,13 +98,13 @@ const Comments = () => {
       }
     ).then(() => {
       getComment(reqPostID);
-      toast.success("Comment Deleted");
+      toast.info("Comment deleted");
     });
   };
 
   return (
     <Fragment>
-      {isAuth && (
+      {isAuth() && (
         <div className="text-center">
           <form
             className="form"
@@ -135,7 +134,7 @@ const Comments = () => {
               className="btn btn-outline-secondary ml-2 mb-1 pb-2"
               type="submit"
               onClick={() => {
-                toast("Comment Added");
+                toast.success("Comment added");
               }}
             >
               <i className="fas fa-paper-plane fa-lg "></i>

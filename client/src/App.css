@@ -5,3 +5,7 @@
 .no-outline:focus {
   outline: none;
 }
+
+.experimental {
+  color: red;
+}

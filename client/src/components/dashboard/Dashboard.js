@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from "react";
 import { useHistory } from "react-router";
-import Cookie from "js-cookie";
 import userImage from "../../assests/userImage.png";
 import fetch from "node-fetch";
 import Footer from "../Footer";
@@ -8,7 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 require("dotenv").config();
 
 const Dashboard = () => {
-  const token = Cookie.get("token");
+  const token = localStorage.getItem("token");
   const history = useHistory();
   const user = JSON.parse(localStorage.getItem("user"));
   const [values, setValues] = useState({
@@ -68,7 +67,7 @@ const Dashboard = () => {
         method: "delete",
       }).then(() => {
         localStorage.removeItem("user");
-        Cookie.remove("token");
+        localStorage.removeItem("token");
         history.push("/");
       });
     } else {
@@ -78,13 +77,9 @@ const Dashboard = () => {
     }
   };
 
-  if (!Cookie.get("token")) {
-    history.push("/");
-  }
-
   return (
     <Fragment>
-      {Cookie.get("token") && (
+      {token && (
         <Fragment>
           <div
             className="mt-4 text-center card"
@@ -256,7 +251,7 @@ const Dashboard = () => {
         </Fragment>
       )}
 
-      {!Cookie.get("token") && history.push("/")}
+      {!token && history.push("/")}
       <Footer />
       <ToastContainer className="Toastify__toast-container--top-center" />
     </Fragment>

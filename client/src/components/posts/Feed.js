@@ -1,4 +1,3 @@
-import Cookie from "js-cookie";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Fragment } from "react";
@@ -9,7 +8,7 @@ require("dotenv").config();
 
 const Feed = () => {
   const history = useHistory();
-  const token = Cookie.get("token");
+  const token = localStorage.getItem("token");
   document.title = "Feed";
 
   const [posts, setPosts] = useState([]);
